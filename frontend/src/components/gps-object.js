@@ -27,8 +27,8 @@ AFRAME.registerComponent('gps-object', {
         this.gpsCamera = this.camera.components['kalman-gps-camera'];
       } else if (this.camera.hasAttribute('standstill-gps-camera')) {
         this.gpsCamera = this.camera.components['standstill-gps-camera'];
-      } else if (this.camera.hasAttribute('set-gps-camera')) {
-        var gpsCamera = this.camera.components['set-gps-camera'];
+      } else if (this.camera.hasAttribute('fixed-point-kalman-gps-camera')) {
+        this.gpsCamera = this.camera.components['fixed-point-kalman-gps-camera'];
       }
       if (data.offset) {
         location.lat += this.addOffset(0.0001);
@@ -50,8 +50,8 @@ AFRAME.registerComponent('gps-object', {
     // When submitting gps coordinations through the app, do the following:
     document.getElementById('submit_gps_coords').addEventListener('click', () => {
       // Get submitted coords
-      const lat = document.getElementById('lat_pos').value;
-      const lng = document.getElementById('lng_pos').value;
+      const lat = parseFloat(document.getElementById('lat_pos').value);
+      const lng = parseFloat(document.getElementById('lng_pos').value);
       
       // Put element at the submitted coords
       this.location = { "lat": lat, "lng": lng }
@@ -65,6 +65,9 @@ AFRAME.registerComponent('gps-object', {
       if (animation) {
         this.el.components['gps-animation'].updateAnimationPosition(this.location);
       }
+
+      console.log(this.location);
+
     });
 
     // When submitting your current gps position, do the following:
@@ -85,6 +88,7 @@ AFRAME.registerComponent('gps-object', {
       if (animation) {
         this.el.components['gps-animation'].updateAnimationPosition(this.location); // DENNE MÅ HA OFFSET
       }
+      console.log(this.location);
     });
     log.info('init done');
   },
@@ -118,7 +122,8 @@ AFRAME.registerComponent('gps-object', {
       this.el.setAttribute('geometry', `primitive: ${object}`);
     }
 
-    if (this.el.data.scale != '') {
+    if (this.data.scale != '') {
+      let scale = this.data.scale;
       this.el.setAttribute('scale', `${scale} ${scale} ${scale}`);
     }
 

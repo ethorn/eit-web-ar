@@ -7,21 +7,11 @@
 
 <body style='margin: 0; overflow: hidden;'>
     <a-scene
-      vr-mode-ui="enabled: true"
+      vr-mode-ui="enabled: false"
       embedded
       arjs='detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
       <a id="myEnterARButton" href="#"></a>
-        <a-assets>
-            <a-asset-item
-                id="mario_kart"
-                src="./gltf/mario_kart/scene.glb"
-                preload="auto">
-            </a-asset-item>
-            <a-asset-item
-                id="banana"
-                src="./gltf/banana/scene.glb"
-                preload="auto">
-            </a-asset-item>
+        <a-assets timeout="80000">
             <a-asset-item
                 id="eiffel_tower"
                 src="./gltf/eiffel_tower/scene.glb"
@@ -43,30 +33,20 @@
         </a-assets>
 
         <a-entity
-          id="mario_kart_ent"
-          animation-mixer
-          animation-pauser
-          gps-object='object: #mario_kart; location: { "lat": 68.679069, "lng": 16.796574999999997 }; scale: 1.12'>
-        </a-entity>
-        <a-entity
-          id="banana_ent"
-          gps-object='object: #banana; location: { "lat": 68.679069, "lng": 16.796574999999997 }; scale: 1.12'>
-        </a-entity>
-        <a-entity
           id="eiffel_tower_ent"
           gps-object='object: #eiffel_tower; location: { "lat": 68.679069, "lng": 16.796574999999997 }; scale: 0.0693'>
         </a-entity>
         <a-entity
           id="ho_oh_ent"
           animation-mixer
-          gps-object='object: #ho_oh; location: { "lat": 68.679069, "lng": 16.796574999999997 }; scale: 0.042'>
+          gps-object='object: #ho_oh; location: { "lat": 68.679069, "lng": 16.796574999999997 }; scale: 0.033'>
         </a-entity>
         <a-entity
           id="lookout_tower_ent"
-          gps-object='object: #lookout_tower; location: { "lat": 68.679103, "lng": 16.797319 }; scale: 0.043'>
+          gps-object='object: #lookout_tower; location: { "lat": 68.679103, "lng": 16.797319 }; scale: 0.043; offset: true;'>
         </a-entity>
 
-        <a-camera fixed-point-kalman-gps-camera="R: 1; Q: 0.12; logConsole: true; set_coords: [68.679069, 16.796574999999997]; radius: 2" rotation-reader look-controls position="0 0 0">
+        <a-camera fixed-point-kalman-gps-camera="R: 1; Q: 0.12; logConsole: true; set_coords: [68.679069, 16.796574999999997]; radius: 4" rotation-reader look-controls position="0 0 0">
             <a-entity
                 cursor="fuse: false"
                 raycaster="interval: 20; objects: .cursor-interactive"

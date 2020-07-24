@@ -197,13 +197,14 @@ AFRAME.registerComponent('fixed-point-kalman-gps-camera', {
           }
         }
 
-        console.log(poi_array);
+        /*console.log(poi_array);
         console.log(closest_distance);
         console.log(closest_index);
         console.log(distances);
         
 
         console.log(this.currentCoords);
+        */
 
         if (closest_distance < Radius) {
           this.currentCoords.latitude = closest_poi[0];
@@ -211,7 +212,7 @@ AFRAME.registerComponent('fixed-point-kalman-gps-camera', {
           this.currentCoords.altitude = closest_poi[2];
         }
 
-        console.log(this.currentCoords);
+        //console.log(this.currentCoords);
 
         //console.log(this.currentCoords);
 

@@ -25,8 +25,8 @@ Add event listener for when the user wants to use the current location:
           var gpsCamera = this.camera.components['kalman-gps-camera'];
         } else if (this.camera.hasAttribute('standstill-gps-camera')) {
           var gpsCamera = this.camera.components['standstill-gps-camera'];
-        } else if (this.camera.hasAttribute('set-gps-camera')) {
-          var gpsCamera = this.camera.components['set-gps-camera'];
+        } else if (this.camera.hasAttribute('fixed-point-kalman-gps-camera')) {
+          var gpsCamera = this.camera.components['fixed-point-kalman-gps-camera'];
         }
 
         var currentPos = gpsCamera.currentCoords;
