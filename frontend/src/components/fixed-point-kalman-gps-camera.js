@@ -209,11 +209,16 @@ AFRAME.registerComponent('fixed-point-kalman-gps-camera', {
           this.currentCoords.latitude = closest_poi[0];
           this.currentCoords.longitude = closest_poi[1];
           this.currentCoords.altitude = closest_poi[2];
+        } else {
+          //this.currentCoords.latitude = position.coords.latitude;
+          //this.currentCoords.longitude = position.coords.longitude; 
+          //this.currentCoords.altitude = 0;
+          this.currentCoords = position.coords;
         }
 
-        console.log(this.currentCoords);
-
         //console.log(this.currentCoords);
+
+        console.log(this.currentCoords);
 
         if (this.gpsTimestampArray.length < 2) {
           this.gpsTimestampArray.push(position.timestamp);
@@ -229,8 +234,9 @@ AFRAME.registerComponent('fixed-point-kalman-gps-camera', {
   },
 
   tick: function () {
+    console.log(this.heading); 
     if (this.heading === null) {
-      return;
+      return; 
     }
     this._updateRotation();
   },
@@ -402,7 +408,12 @@ AFRAME.registerComponent('fixed-point-kalman-gps-camera', {
 
     position.x = this.kalmanx.filter(gpsPos.x, u.x);
     position.z = this.kalmanz.filter(gpsPos.z, u.z);
-    position.y = this.currentCoords.altitude;
+    /*if (closest_distance < Radius) {
+      position.y = this.currentCoords.altitude;
+    } else {
+    position.y = 0;
+    }
+    */
 
     // update position
     this.el.setAttribute('position', position);
