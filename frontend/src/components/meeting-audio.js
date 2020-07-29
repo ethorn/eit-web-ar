@@ -61,7 +61,7 @@ AFRAME.registerComponent('meeting-audio', {
   gotMessageFromServer: function(data) {
     console.log("got message");
     if (!this.peerConnection) {
-      console.log('GOT MESSAGE FROM SERVER');
+      console.log('got message from server');
       this.start(false);
     }
     
@@ -106,10 +106,14 @@ AFRAME.registerComponent('meeting-audio', {
   },
 
   gotRemoteStream: function(event) {
+    console.log("got remote stream")
     let audioElem = document.createElement("audio");
     audioElem.srcObject = event.streams[0];
     this.el.appendChild(audioElem);
     audioElem.play();
+    console.log(this.sceneEl);
+    console.log(this.el);
+    console.log(audioElem);
   },
 
   errorHandler: function(error) {
