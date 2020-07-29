@@ -145,11 +145,27 @@ module.exports = {
         //console.log(`position-update: ${userId}: ${latitude}, ${longitude} - ${heading}`);
         _savePosition(userId, latitude, longitude, heading);
       });
+      
+      socket.on('rocket-hit-user', data => {
+        this.emitRocketHitUser(data);
+      });
+      
+      socket.on('audio-message', data => {
+        this.emitAudioMessage(data);
+      });
     });
     
     setInterval(function() {
       _emitPositionUpdate();
     }, _emitPositionInterval);
+  },
+  
+  emitAudioMessage: function(data) {
+    _io.emit('audio-message', data);
+  },
+  
+  emitRocketHitUser: function(data) {
+    _io.emit('rocket-hit-user', data);
   },
 
   emitUserLeft: function(userId) {
@@ -168,7 +184,7 @@ module.exports = {
     });
   },
 
-  emitRocketJoined: function(rocketId, properties) {
+  emitInteractionJoined: function(interactionId, properties) {
     if (_sockets.length < 1) {
       return;
     }
@@ -202,7 +218,7 @@ module.exports = {
           
           const socket = _getSocketFromUser(a_userId);
           if (socket === null) continue;
-          socket.emit('rocket-joined', properties);
+          socket.emit('interaction-joined', properties);
         }
       });
     });
