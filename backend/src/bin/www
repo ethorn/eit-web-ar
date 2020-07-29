@@ -9,6 +9,7 @@ var debug = require('debug')('backend:api');
 var http = require('http');
 var socketio = require('../modules/socketio');
 var meeting = require('../modules/meeting');
+var meetingAudio = require('../modules/meeting-audio');
 
 /**
  * Get port from environment and store in Express.
@@ -30,6 +31,7 @@ var server = http.createServer(app);
 const io = socketio.connect(server);
 app.set('io', io);
 meeting.init(io);
+meetingAudio.init(io);
 
 /**
  * Listen on provided port, on all network interfaces.

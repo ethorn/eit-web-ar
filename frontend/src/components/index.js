@@ -24,3 +24,4 @@ import "./game";
 import "./fixed-point-kalman-gps-camera";
 import "./handpose";
 import "./meeting";
+import "./meeting-audio";

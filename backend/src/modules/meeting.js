@@ -133,7 +133,7 @@ module.exports = {
       
       socket.on('connect-socket-to-user', function(data) {
         const userId = data.userId;
-        //console.log(`connect-socket-to-user ${userId}`);
+        console.log(`connect-socket-to-user ${userId}`);
         _addToSocketList(userId, socket);
       });
       
